@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FriendsContext } from "../contexts/FriendsContext";
 import {friendsData as starterFriends} from '../data';
 
@@ -6,10 +6,13 @@ const FriendsProvider = ({children}) => {
     const existingState = JSON.parse(localStorage.getItem('friends'));
     const [friends, setFriends] = useState(existingState || starterFriends);
 
+    useEffect(() => {
+        localStorage.setItem('friends', JSON.stringify(friends));
+    }, [friends])
+
     const addFriend = friend => {
         const newFriends = [...friends,friend];
         setFriends(newFriends);
-        localStorage.setItem('friends', JSON.stringify(newFriends));
     }
 
     const updateFriend = updateInfo => {
@@ -21,7 +24,6 @@ const FriendsProvider = ({children}) => {
         })
 
         setFriends(updateFriends);
-        localStorage.setItem('friends', JSON.stringify(updateFriends));
     }
 
     return (

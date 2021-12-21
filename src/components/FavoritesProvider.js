@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 
 const FavoritesProvider = ({children}) => {
 
     const existingState = JSON.parse(sessionStorage.getItem('favorateIds'));
     const [favoriteIds, setFavoriteIds] = useState(existingState||[]);
+
+    useEffect(() => {
+        localStorage.setItem('favoriteIds', JSON.stringify(favoriteIds));
+    }, [favoriteIds])
 
     const toggleFavorite = personId => {   
         let newFavoritesIds = favoriteIds.includes(personId)

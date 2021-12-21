@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import { FriendsContext } from '../contexts/FriendsContext';
 import { ProfileInfo } from '../components/ProfileInfo';

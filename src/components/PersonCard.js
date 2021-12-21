@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
 import styles from './PersonCard.Module.css';
+import { useEffect } from 'react/cjs/react.development';
 
 const PersonCard = ({
     person: { id, profilePicUrl, name, age },
@@ -8,6 +8,12 @@ const PersonCard = ({
     actionName,
     onAction,
 }) => {
+    useEffect(() => {
+        console.log('PersonCard effet callback called')
+
+        return () => console.log('PersonCard Cleanup!')
+    })
+    
     return (
             <div 
                 className={styles.card}

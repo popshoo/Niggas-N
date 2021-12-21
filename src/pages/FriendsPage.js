@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { useNavigate } from                 'react-router-dom';
-import PropTypes from 'prop-types';
 import { myprofileData } from  '../data';
 import { FavoritesContext } from '../contexts/FavoritesContext';
 import { FriendsContext } from '../contexts/FriendsContext';
@@ -9,6 +8,7 @@ import { WelcomeMessage } from              '../components/WelcomeMessage';
 import styles from                          './FriendsPage.Module.css'
 
 const FriendsPage = () => {
+
 
     const {favoriteIds, toggleFavorite} = useContext(FavoritesContext);
     const {friends} = useContext(FriendsContext);
@@ -30,7 +30,7 @@ const FriendsPage = () => {
         <WelcomeMessage name={myprofileData.name} />
         <p>You have {favoriteIds.length} {favoriteIds.length === 1 ? 'favorite' : 'favorites'}</p>
         <h2 className={styles.contentHeading}>Favorites</h2>
-        <PeopleList 
+        <PeopleList
             people={favorites} 
             onClickPerson={goToPersonDetail} 
             personActionName="Remove from Favorites"
@@ -38,7 +38,7 @@ const FriendsPage = () => {
 
         <h2 className={styles.contentHeading}>My Friends</h2>
 
-        <PeopleList 
+        <PeopleList
             people={nonFavorites} 
             onClickPerson={goToPersonDetail} 
             personActionName="Add to Favorites"
@@ -46,10 +46,6 @@ const FriendsPage = () => {
             allowAdditions/>
         </>
         );
-}
-
-FriendsPage.propTypes = {
-    onToggleFavorite: PropTypes.func.isRequired,
 }
 
 export { FriendsPage };

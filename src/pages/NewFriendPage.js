@@ -1,9 +1,9 @@
-import {useState, useContext} from 'react';
+import {useContext} from 'react';
 import {useNavigate} from 'react-router-dom'
 import {v4 as uuid} from 'uuid';
 import { PersonInfoForm } from '../components/PersonInfoForm';
 import { FriendsContext } from '../contexts/FriendsContext';
-import styles from './NewFriendPage.Module.css';
+
 
 const NewFriendPage = ()=> {
     const {addFriend} = useContext(FriendsContext);
