@@ -1,19 +1,16 @@
 import { useState } from 'react';
-import { myprofileData as startingInfo } from '../data';
+import { useSelector } from 'react-redux';
 import { ProfileInfo } from '../components/ProfileInfo';
 import {PersonInfoForm} from '../components/PersonInfoForm'
 import styles from './UserProfilePage.Module.css'
 
 
 const UserProfilePage = () => {
-    const existingInfo = JSON.parse(localStorage.getItem('userInfo'));
     
     const [isEditing, setIsEditing] = useState(false);
-    const [userInfo, setUserInfo] = useState(existingInfo || startingInfo);
+    const userInfo = useSelector(state => state.profile)
 
     const updateUserInfo = updatedInfo => {
-        setUserInfo(updatedInfo);
-        localStorage.setItem('userInfo', JSON.stringify(updatedInfo));
         setIsEditing(false);
     }
 

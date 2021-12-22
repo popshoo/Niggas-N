@@ -4,17 +4,17 @@ import { FriendDetailPage } from './pages/FriendDetailPage';
 import { FriendsPage } from './pages/FriendsPage';
 import { NewFriendPage } from './pages/NewFriendPage';
 import { UserProfilePage } from './pages/UserProfilePage';
-import { FavoritesProvider } from './components/FavoritesProvider'; 
-import { FriendsProvider } from './components/FriendsProvider';
+// import { FavoritesProvider } from './components/FavoritesProvider'; 
+// import { FriendsProvider } from './components/FriendsProvider';
 import { NavBar } from './components/NavBar';
 import styles from './App.module.css';
+
 
 export const App = () => {
   return (
     <BrowserRouter>
       <NavBar/>
-      <FavoritesProvider>
-      <FriendsProvider>
+  
       <div className={styles.contentContainer}>
         <Routes>
           <Route path="/" 
@@ -40,8 +40,7 @@ export const App = () => {
           </Route>
         </Routes>
           </div>
-          </FriendsProvider>
-        </FavoritesProvider>
+          
     </BrowserRouter>
   );
 }

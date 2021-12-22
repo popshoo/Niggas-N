@@ -1,22 +1,18 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FavoritesContext } from '../contexts/FavoritesContext';
-import { FriendsContext } from '../contexts/FriendsContext';
 import { ProfileInfo } from '../components/ProfileInfo';
 
 const FriendDetailPage = () => {
     const navigate = useNavigate(FriendDetailPage);
-    const {favoriteIds, toggleFavorite} = useContext(FavoritesContext);
-    const {friends} = useContext(FriendsContext);
 
     const { friendId } = useParams();
-    const selectedFriend = friends.find(friend => friend.id === friendId)
 
-    const isFavorite = favoriteIds.includes(friendId);
+    const selectedFriend = useSelector(state => state.friends.find(friend => friend.id === friendId));
+    const isFavorite = useSelector(state => state.favorites.includes(friendId));
 
     const pageActions = [{
         actionName: isFavorite ? 'Remove from Favorited ' : 'Add to Favorite',
-        handler: () => toggleFavorite(friendId),
+        // handler: () => toggleFavorite(friendId),
     }, {
         actionName: 'Edit Info',
         handler: () => navigate(`/edit/${friendId}`),

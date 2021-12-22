@@ -1,21 +1,15 @@
-import { useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { FriendsContext } from "../contexts/FriendsContext";
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { PersonInfoForm } from "../components/PersonInfoForm";
 
 const EditFriendPage = () => {
     const {friendId} = useParams();
-    const {friends, updateFriend} = useContext(FriendsContext);
+    const friends = useSelector(state => state.friends);
     const selectedFriend = friends.find(f => f.id === friendId);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const saveUpdateInformation = updateInfo => {
         
-        updateFriend({
-        ...updateInfo,
-        id: friendId,});
-
-        navigate('/');
     };
 
     return (
