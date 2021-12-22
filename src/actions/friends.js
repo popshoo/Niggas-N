@@ -7,5 +7,5 @@ export const addFriend = newFriendInfo => ({
 export const EDIT_FRIEND = 'EDIT_FRIEND'; 
 export const editFriend = updates => ({
     type: EDIT_FRIEND,
-    payload: { updates},
+    payload: {updates},
 });

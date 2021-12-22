@@ -1,7 +1,7 @@
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const addFavorite = (friendId) => ({
     type: ADD_FAVORITE,
-    payload: {friendId: '123'}
+    payload: {friendId}
 });
 
 
@@ -10,10 +10,3 @@ export const removeFavorite = (friendId) => ({
     type: REMOVE_FAVORITE,
     payload: {friendId},
 });
-
-
-
-
-/*
-dispatch({ addFavorite, {friendId: '123'}})
-*/
