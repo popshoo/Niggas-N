@@ -5,15 +5,15 @@ import { myprofileData } from               '../data';
 import { PeopleList } from                  '../components/PeopleList';
 import { WelcomeMessage } from              '../components/WelcomeMessage';
 import styles from                          './FriendsPage.Module.css'
+import { getFavorites, getNonFavorites } from '../selectors/favorites';
 
 const FriendsPage = () => {
+    console.log('Friendsp0 Page Rendering')
     const navigate = useNavigate();
     const dispatch = useDispatch();
          
-    const favorites = useSelector(state => state.favorites.map(id =>
-        state.friends.find(friend => friend.id === id )));
-    const nonFavorites = useSelector(state => state.friends.filter(friend =>
-        !state.favorites.find(id => friend.id === id)));
+    const favorites = useSelector(getFavorites);
+    const nonFavorites = useSelector(getNonFavorites);
 
     const goToPersonDetail = personId => {
         navigate(`/friends/${personId}`)

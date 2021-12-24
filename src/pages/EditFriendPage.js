@@ -1,14 +1,14 @@
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PersonInfoForm } from "../components/PersonInfoForm";
 import {editFriend} from '../actions/friends';
+import { getFriendById, getFriends } from '../selectors/friends';
 
 const EditFriendPage = () => {
+    console.log('EditFriendPage rendering');
+
     const {friendId} = useParams();
-    const friends = useSelector(state => state.friends);
-    const selectedFriend = friends.find(f => f.id === friendId);
-    
+    const selectedFriend = useSelector(getFriendById(friendId));
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

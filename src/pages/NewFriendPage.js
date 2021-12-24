@@ -5,6 +5,7 @@ import { PersonInfoForm } from '../components/PersonInfoForm';
 import {addFriend} from '../actions/friends'
 
 const NewFriendPage = ()=> {
+    console.log('NewFriendPage Rendering')
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

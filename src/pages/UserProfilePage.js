@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ProfileInfo } from '../components/ProfileInfo';
 import {PersonInfoForm} from '../components/PersonInfoForm'
 import {updateProfile} from '../actions/profile'
+import { getProfileInfo } from '../selectors/profile';
 import styles from './UserProfilePage.Module.css'
 
 
 const UserProfilePage = () => {
-
-    const userInfo = useSelector(state => state.profile)
+    console.log('UserProfilePage Rendering')
+    const userInfo = useSelector(getProfileInfo)
     const dispatch = useDispatch();
 
     const [isEditing, setIsEditing] = useState(false);
