@@ -17,7 +17,8 @@ const PersonCard = ({
     return (
             <div 
                 className={styles.card}
-                onClick={() => onCardClicked(id)}>
+                onClick={() => onCardClicked(id)}
+                role="listitem">
                 
                 <div className={styles.detailsContainer}>
                 <div className={styles.profilePicLeft}>
