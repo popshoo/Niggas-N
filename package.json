@@ -42,7 +42,6 @@
     ]
   },
   "devDependencies": {
-    "history": "^5.2.0",
     "prop-types": "^15.7.2",
     "redux-devtools-extension": "^2.13.9"
   }
