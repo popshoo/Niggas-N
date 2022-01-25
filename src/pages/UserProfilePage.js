@@ -1,28 +1,41 @@
-import { useState } from 'react';
-import { myprofileData as startingInfo } from '../data';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { ProfileInfo } from '../components/ProfileInfo';
 import {PersonInfoForm} from '../components/PersonInfoForm'
 import styles from './UserProfilePage.Module.css'
 
-
 const UserProfilePage = () => {
-    const existingInfo = JSON.parse(localStorage.getItem('userInfo'));
     
     const [isEditing, setIsEditing] = useState(false);
-    const [userInfo, setUserInfo] = useState(existingInfo || startingInfo);
+    const [isLoading, setIsLoading] = useState(true);
+    const [userInfo, setUserInfo] = useState(null);
 
-    const updateUserInfo = updatedInfo => {
-        setUserInfo(updatedInfo);
-        localStorage.setItem('userInfo', JSON.stringify(updatedInfo));
+
+    useEffect(() => {
+
+        const loadUserInfo = async () => {
+            const response = await axios.get('/users/007');
+            setUserInfo(response.data);
+            setIsLoading(false);
+        }
+
+        loadUserInfo();
+    }, []);
+
+
+    const updateUserInfo = async updatedInfo => {
+        const response = await axios.put('/users/007', updatedInfo)
+        setUserInfo(response.data);
         setIsEditing(false);
-    }
+    };
 
     const actions = [{
         actionName: 'Edit My Info',
         handler: () => setIsEditing(true),
     }];
 
-    return (
+    //Visualize diferentes formas de jugar con el  return de CARGA
+    return isLoading ? <p>Loading...</p> : (
         <>
         <h2 className={styles.contentHeading}>My Profile</h2>
         {isEditing

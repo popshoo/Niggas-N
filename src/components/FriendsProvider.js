@@ -1,33 +1,38 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { FriendsContext } from "../contexts/FriendsContext";
-import {friendsData as starterFriends} from '../data';
 
 const FriendsProvider = ({children}) => {
-    const existingState = JSON.parse(localStorage.getItem('friends'));
-    const [friends, setFriends] = useState(existingState || starterFriends);
+    const [isLoading , setIsLoading] = useState(true);
+    const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        localStorage.setItem('friends', JSON.stringify(friends));
-    }, [friends])
+        const loadFriend = async () => {
+            const response = await axios.get('/friends');
+            setFriends(response.data);
+            setIsLoading(false);
+        }
+        loadFriend();
+    }, []);
 
-    const addFriend = friend => {
-        const newFriends = [...friends,friend];
-        setFriends(newFriends);
+    const addFriend = async newFriendInfo => {
+        const response = await axios.post('/friends', newFriendInfo);
+        setFriends(response.data);
     }
 
-    const updateFriend = updateInfo => {
-        const updateFriends = friends.map(friend => {
-            if (friend.id === updateInfo.id){
-                return updateInfo;
-            }
-            return friend;
-        })
+    const updateFriend = async updateInfo => {
+        const friendId = updateInfo.id;
+        const response = await axios.put(`/friends/${friendId}`, updateInfo);
+        setFriends(response.data);
+    }
 
-        setFriends(updateFriends);
+    const removeFriend = async friendId => {
+        const response = await axios.delete(`/friends/${friendId}`);
+        setFriends(response.data);
     }
 
     return (
-        <FriendsContext.Provider value={{friends, addFriend, updateFriend}}>
+        <FriendsContext.Provider value={{isLoading, friends, addFriend, updateFriend, removeFriend}}>
             {children}
         </FriendsContext.Provider>
     );

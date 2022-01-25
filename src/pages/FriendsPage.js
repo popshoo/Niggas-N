@@ -10,9 +10,9 @@ import styles from                          './FriendsPage.Module.css'
 const FriendsPage = () => {
 
 
-    const {favoriteIds, toggleFavorite} = useContext(FavoritesContext);
-    const {friends} = useContext(FriendsContext);
-
+    const {isLoading: isLoadingFavorites, favoriteIds, toggleFavorite} = useContext(FavoritesContext);
+    const {isLoading: isLoadingFriends, friends} = useContext(FriendsContext);
+    const isLoading = isLoadingFavorites || isLoadingFriends;
     const navigate = useNavigate();
          
     const favorites = favoriteIds.map(id => 
@@ -23,6 +23,10 @@ const FriendsPage = () => {
 
     const goToPersonDetail = personId => {
         navigate(`/friends/${personId}`)
+    }
+
+    if (isLoading) {
+        return <p>Loading...</p>;
     }
 
         return (
