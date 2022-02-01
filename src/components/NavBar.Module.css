@@ -18,3 +18,9 @@
 .profileButton {
     float: right;
 }
+
+.actionButton {
+    float: right;
+    margin-top: 16px;
+    margin-right: 8px;
+}
