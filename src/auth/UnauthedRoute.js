@@ -1,15 +1,14 @@
-import {useContext} from 'react';
 import { Navigate, Route } from 'react-router-dom';
-import {UserContext} from '../contexts/UserContext';
+import {useUser} from '../hooks/useUser'
 
 export const UnauthedRoute = props => {
-    const {isLoading, user} = useContext(UserContext);
+    const {isLoading, user} = useUser();
 
     if (isLoading) {
         return <p>Loading...</p>
     }   
     
     return !!user 
-        ? <Navigate to="/" />
+        ? <Navigate to="/user-profile" />
         : <Route {...props} />; 
 };

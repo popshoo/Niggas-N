@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { AuthedRoute } from './auth/AuthedRoute';
 import { UnauthedRoute } from './auth/UnauthedRoute';
 import { EditFriendPage } from './pages/EditFriendPage';
@@ -13,6 +13,7 @@ import { NavBar } from './components/NavBar';
 import { LoginPage } from './components/LoginPage';
 import styles from './App.module.css';
 
+
 export const App = () => {
   return (
     <UserProvider>
@@ -22,19 +23,19 @@ export const App = () => {
       <FriendsProvider>
         <div className={styles.contentContainer}>
           <Routes>
-            {/* NOTES: (AUTHEDROUTE) AND (UNAUTHEDROUTE) UNDEFINED For testing security purposes */}
+            {/* NOTES: THE COMPONENTS (AUTHEDROUTE) AND (UNAUTHEDROUTE) IS UNDEFINED, For testing security purposes */}
 
             <Route 
               path="/"
-              element={<FriendsPage />} />
+              element={<AuthedRoute><FriendsPage /></AuthedRoute> }/>
                       
             <Route 
               path="/friends/:friendId" 
-              element={<FriendDetailPage />} /> 
+              element={<AuthedRoute><FriendDetailPage /></AuthedRoute>} /> 
                       
             <Route
               path="/edit/:friendId" 
-              element={<EditFriendPage />} />
+              element={<AuthedRoute><EditFriendPage /></AuthedRoute>} />
             
             <Route
               path="/user-profile"
@@ -42,12 +43,11 @@ export const App = () => {
 
             <Route 
               path="/new-friends"
-              element={<NewFriendPage />} />
+              element={<AuthedRoute><NewFriendPage /></AuthedRoute>} />
 
-            
             <Route 
               path="/login"
-              element={<LoginPage />} />    
+              element={<LoginPage/>} />    
             
             </Routes>  
             </div>

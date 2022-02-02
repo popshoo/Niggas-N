@@ -1,13 +1,12 @@
-import {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import {getAuth, signOut} from 'firebase/auth'
-import { UserContext } from '../contexts/UserContext';
 import styles from './NavBar.Module.css'
+import { useUser } from '../hooks/useUser';
 
 const NavBar = () => {
     // TEXT HACKED!    
     // const maliciousString = `<img onerror='alert("Hacked!")' src='invalid-image' />`;
-    const {isLoading, user } = useContext(UserContext);
+    const {isLoading, user } = useUser();
 
     const logOut = async () => {
         const auth = getAuth();

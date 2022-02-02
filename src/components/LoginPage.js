@@ -1,14 +1,16 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const logIn = async () => {
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password);
+        navigate('/user-profile')
     }
 
     return (
@@ -16,7 +18,7 @@ export const LoginPage = () => {
         <h1>Log In</h1>
         <input 
             type="email"
-            placeholder="rmontenegroch01@gmail.com"
+            placeholder="C. E."
             className="full-width space-below"
             value={email} 
             onChange={e => setEmail(e.target.value)}/>
